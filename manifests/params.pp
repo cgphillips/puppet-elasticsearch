@@ -94,4 +94,17 @@ class elasticsearch::params {
     }
   }
 
+  # plugin parameters
+  case $::operatingsystem {
+    'Debian', 'Ubuntu': {
+      $dir_base  = '/usr/share/elasticsearch'
+      $dir_plugins = "${dir_base}/plugins"
+      $bin_plugin  = "${dir_base}/bin/plugin"
+    }
+    default: {
+      fail("\"${module_name}\" provides no plugin parameters
+      for \"${::operatingsystem}\"")
+    }
+  }
+
 }
